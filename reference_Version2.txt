@@ -1,0 +1,9 @@
+Tracking One More - App reference and notes
+
+App Store URL:
+https://apps.apple.com/gb/app/trackingonemore/id6755639475
+
+Notes:
+- This site is a placeholder scaffold. Replace screenshots in the /screenshots folder.
+- Update copy in index.html to match the real app description.
+- To publish: push these files to a repository and enable GitHub Pages, or deploy to Netlify/Vercel.
