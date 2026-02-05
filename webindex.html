@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OneMore Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary">
+      <div class="brand">
+        <div class="logo">OneMore</div>
+        <div class="brand-sub">Strength, nutrition, recovery</div>
+      </div>
+      <nav class="nav" data-nav>
+        <a class="nav-link" href="#dashboard" data-view-link="dashboard">Dashboard</a>
+        <a class="nav-link" href="#food" data-view-link="food">Food</a>
+        <a class="nav-link" href="#workouts" data-view-link="workouts">Workouts</a>
+        <a class="nav-link" href="#profile" data-view-link="profile">Profile</a>
+        <button class="nav-logout" type="button">Log out</button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="pill">Offline ready</div>
+        <div class="muted">Local-only demo</div>
+      </div>
+    </aside>
+
+    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="drawer-header">
+        <div class="logo">OneMore</div>
+        <button class="icon-btn" id="closeDrawer" aria-label="Close menu">
+          <span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav" data-nav>
+        <a class="nav-link" href="#dashboard" data-view-link="dashboard">Dashboard</a>
+        <a class="nav-link" href="#food" data-view-link="food">Food</a>
+        <a class="nav-link" href="#workouts" data-view-link="workouts">Workouts</a>
+        <a class="nav-link" href="#profile" data-view-link="profile">Profile</a>
+        <button class="nav-logout" type="button">Log out</button>
+      </nav>
+    </div>
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn" id="openDrawer" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="topbar-title" id="topbarTitle">Dashboard</div>
+        <div class="topbar-actions">
+          <details class="menu" id="addMenu">
+            <summary class="pill">Add entry</summary>
+            <div class="menu-panel">
+              <button type="button" data-menu-add="food">Food entry</button>
+              <button type="button" data-menu-add="workout">Workout log</button>
+            </div>
+          </details>
+          <button class="pill outline" id="scanButton" type="button">Scan barcode</button>
+        </div>
+      </header>
+
+      <section class="view view-dashboard is-active" data-view="dashboard">
+        <div class="dashboard-grid">
+          <div class="column col-left">
+            <div class="card" style="--delay: 0.05s">
+              <div class="card-header">
+                <div>
+                  <h2>Dashboard</h2>
+                  <p class="muted" id="todayLabel">Today</p>
+                </div>
+                <div class="pill">Goal status</div>
+              </div>
+              <div class="summary-grid">
+                <div>
+                  <div class="label">Calories</div>
+                  <div class="value" id="summaryCalories">0</div>
+                  <div class="progress"><span id="calorieProgress"></span></div>
+                </div>
+                <div>
+                  <div class="label">Protein</div>
+                  <div class="value" id="summaryProtein">0 g</div>
+                  <div class="progress"><span id="proteinProgress"></span></div>
+                </div>
+                <div>
+                  <div class="label">Carbs</div>
+                  <div class="value" id="summaryCarbs">0 g</div>
+                  <div class="progress"><span id="carbProgress"></span></div>
+                </div>
+                <div>
+                  <div class="label">Fat</div>
+                  <div class="value" id="summaryFat">0 g</div>
+                  <div class="progress"><span id="fatProgress"></span></div>
+                </div>
+              </div>
+              <div class="stat-row">
+                <div>
+                  <div class="label">Move</div>
+                  <div class="value" id="summaryMove">0 kcal</div>
+                </div>
+                <div>
+                  <div class="label">Workout time</div>
+                  <div class="value" id="summaryWorkout">0 min</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="--delay: 0.12s">
+              <div class="card-header">
+                <div>
+                  <h3>Food history</h3>
+                  <p class="muted">Last 7 days</p>
+                </div>
+                <button class="link-btn" type="button" data-go="food">View all</button>
+              </div>
+              <div class="list" id="foodHistoryList"></div>
+            </div>
+          </div>
+
+          <div class="column col-middle">
+            <div class="card" style="--delay: 0.09s">
+              <div class="card-header">
+                <div>
+                  <h3>Food entry</h3>
+                  <p class="muted">Capture details with barcode, photo, or manual entry.</p>
+                </div>
+              </div>
+              <form class="form js-food-form" data-form="food">
+                <div class="field-grid">
+                  <label class="field">
+                    <span>Meal name</span>
+                    <input type="text" name="name" placeholder="e.g., Protein shake" required />
+                  </label>
+                  <label class="field">
+                    <span>Date & time</span>
+                    <input type="datetime-local" name="timestamp" />
+                  </label>
+                  <label class="field">
+                    <span>Calories</span>
+                    <input type="number" name="calories" min="0" step="1" placeholder="0" />
+                  </label>
+                  <label class="field">
+                    <span>Protein (g)</span>
+                    <input type="number" name="protein" min="0" step="0.1" placeholder="0" />
+                  </label>
+                  <label class="field">
+                    <span>Carbs (g)</span>
+                    <input type="number" name="carbs" min="0" step="0.1" placeholder="0" />
+                  </label>
+                  <label class="field">
+                    <span>Fat (g)</span>
+                    <input type="number" name="fat" min="0" step="0.1" placeholder="0" />
+                  </label>
+                </div>
+                <label class="field">
+                  <span>Ingredients</span>
+                  <textarea name="ingredients" rows="3" placeholder="Oats, almond milk, banana"></textarea>
+                </label>
+                <label class="field">
+                  <span>Notes</span>
+                  <textarea name="notes" rows="2" placeholder="Mood, energy, or cravings"></textarea>
+                </label>
+                <div class="form-actions">
+                  <button class="pill" type="submit">Add food entry</button>
+                  <button class="pill outline" type="reset">Clear</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="column col-right">
+            <div class="card quick-add" style="--delay: 0.07s">
+              <div class="card-header">
+                <div>
+                  <h3>Quick add</h3>
+                  <p class="muted">Scan a barcode or add a fast entry.</p>
+                </div>
+                <div class="pill outline">Camera ready</div>
+              </div>
+              <div class="field-grid">
+                <label class="field">
+                  <span>Barcode / UPC</span>
+                  <input type="text" id="barcodeInput" placeholder="Scan or type" />
+                </label>
+                <label class="field">
+                  <span>Lookup</span>
+                  <button class="pill outline" type="button" id="barcodeLookup">Find product</button>
+                </label>
+              </div>
+              <label class="field file-input">
+                <span>Scan with camera</span>
+                <input type="file" id="barcodeFile" accept="image/*" capture="environment" />
+                <div class="file-cta">Choose or capture image</div>
+                <img class="barcode-preview" id="barcodePreview" alt="Barcode preview" />
+              </label>
+              <div class="muted" id="barcodeStatus">Barcode detection ready.</div>
+              <div class="form-actions">
+                <button class="pill" type="button" id="quickAddFood">Quick add food</button>
+                <button class="pill outline" type="button" id="quickAddWorkout">Quick add workout</button>
+              </div>
+            </div>
+
+            <div class="card" style="--delay: 0.14s">
+              <div class="card-header">
+                <div>
+                  <h3>Workout logs</h3>
+                  <p class="muted">Today and recent sessions.</p>
+                </div>
+                <button class="link-btn" type="button" data-go="workouts">View all</button>
+              </div>
+              <div class="list" id="workoutHistoryList"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" data-view="food">
+        <div class="page-grid">
+          <div class="card" style="--delay: 0.05s">
+            <div class="card-header">
+              <div>
+                <h2>Food log</h2>
+                <p class="muted">Meals, snacks, and nutrition totals.</p>
+              </div>
+            </div>
+            <div class="list" id="foodLogList"></div>
+          </div>
+
+          <div class="card" style="--delay: 0.12s">
+            <div class="card-header">
+              <div>
+                <h3>New food entry</h3>
+                <p class="muted">Use the same form as the dashboard for quick entry.</p>
+              </div>
+            </div>
+            <form class="form js-food-form" data-form="food">
+              <div class="field-grid">
+                <label class="field">
+                  <span>Meal name</span>
+                  <input type="text" name="name" placeholder="e.g., Salmon salad" required />
+                </label>
+                <label class="field">
+                  <span>Date & time</span>
+                  <input type="datetime-local" name="timestamp" />
+                </label>
+                <label class="field">
+                  <span>Calories</span>
+                  <input type="number" name="calories" min="0" step="1" placeholder="0" />
+                </label>
+                <label class="field">
+                  <span>Protein (g)</span>
+                  <input type="number" name="protein" min="0" step="0.1" placeholder="0" />
+                </label>
+                <label class="field">
+                  <span>Carbs (g)</span>
+                  <input type="number" name="carbs" min="0" step="0.1" placeholder="0" />
+                </label>
+                <label class="field">
+                  <span>Fat (g)</span>
+                  <input type="number" name="fat" min="0" step="0.1" placeholder="0" />
+                </label>
+              </div>
+              <label class="field">
+                <span>Ingredients</span>
+                <textarea name="ingredients" rows="3" placeholder="Spinach, feta, olive oil"></textarea>
+              </label>
+              <label class="field">
+                <span>Notes</span>
+                <textarea name="notes" rows="2" placeholder="Cravings, digestion"></textarea>
+              </label>
+              <div class="form-actions">
+                <button class="pill" type="submit">Add food entry</button>
+                <button class="pill outline" type="reset">Clear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" data-view="workouts">
+        <div class="page-grid">
+          <div class="card" style="--delay: 0.05s">
+            <div class="card-header">
+              <div>
+                <h2>Workout history</h2>
+                <p class="muted">Strength, cardio, and activity logs.</p>
+              </div>
+            </div>
+            <div class="list" id="workoutsList"></div>
+          </div>
+
+          <div class="card" style="--delay: 0.12s">
+            <div class="card-header">
+              <div>
+                <h3>New workout log</h3>
+                <p class="muted">Track duration, distance, and weights.</p>
+              </div>
+            </div>
+            <form class="form js-workout-form" data-form="workout">
+              <div class="field-grid">
+                <label class="field">
+                  <span>Workout type</span>
+                  <select name="type">
+                    <option value="cycling">Cycling</option>
+                    <option value="treadmill">Treadmill</option>
+                    <option value="weights">Weights</option>
+                    <option value="hiit">HIIT</option>
+                    <option value="other">Other</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Date & time</span>
+                  <input type="datetime-local" name="timestamp" />
+                </label>
+                <label class="field">
+                  <span>Duration (min)</span>
+                  <input type="number" name="duration" min="0" step="1" placeholder="0" />
+                </label>
+                <label class="field">
+                  <span>Distance (km)</span>
+                  <input type="number" name="distance" min="0" step="0.1" placeholder="0" />
+                </label>
+                <label class="field">
+                  <span>Machine</span>
+                  <input type="text" name="machine" placeholder="Bike, rower" />
+                </label>
+                <label class="field">
+                  <span>Weight used (kg)</span>
+                  <input type="number" name="weight" min="0" step="0.5" placeholder="0" />
+                </label>
+              </div>
+              <label class="field">
+                <span>Notes</span>
+                <textarea name="notes" rows="2" placeholder="Intensity, target muscles"></textarea>
+              </label>
+              <div class="form-actions">
+                <button class="pill" type="submit">Add workout</button>
+                <button class="pill outline" type="reset">Clear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" data-view="profile">
+        <div class="page-grid">
+          <div class="card" style="--delay: 0.06s">
+            <div class="card-header">
+              <div>
+                <h2>Profile</h2>
+                <p class="muted">Personal details and goals.</p>
+              </div>
+            </div>
+            <form class="form" id="profileForm">
+              <div class="field-grid">
+                <label class="field">
+                  <span>Name</span>
+                  <input type="text" name="name" placeholder="Your name" />
+                </label>
+                <label class="field">
+                  <span>Date of birth</span>
+                  <input type="date" name="dob" />
+                </label>
+                <label class="field">
+                  <span>Height (cm)</span>
+                  <input type="number" name="height" min="0" step="0.5" placeholder="0" />
+                </label>
+                <label class="field">
+                  <span>Weight (kg)</span>
+                  <input type="number" name="weight" min="0" step="0.1" placeholder="0" />
+                </label>
+                <label class="field">
+                  <span>Primary goal</span>
+                  <select name="goal">
+                    <option value="loseWeight">Lose Weight</option>
+                    <option value="maintain">Maintain</option>
+                    <option value="gainMuscle">Gain Muscle</option>
+                    <option value="getLean">Get Lean</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Dietary issues</span>
+                  <input type="text" name="dietary" placeholder="Gluten, lactose, allergies" />
+                </label>
+              </div>
+              <label class="field">
+                <span>Notes</span>
+                <textarea name="notes" rows="3" placeholder="Recovery goals, training split"></textarea>
+              </label>
+              <div class="form-actions">
+                <button class="pill" type="submit">Save profile</button>
+                <button class="pill outline" type="reset">Reset</button>
+              </div>
+            </form>
+          </div>
+          <div class="card" style="--delay: 0.14s">
+            <div class="card-header">
+              <div>
+                <h3>At-a-glance</h3>
+                <p class="muted">Overview from your latest entries.</p>
+              </div>
+            </div>
+            <div class="profile-summary" id="profileSummary"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
