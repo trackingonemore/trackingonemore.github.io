@@ -10,7 +10,28 @@
 </head>
 
 <body style="background:#061a2b; color:#e9f1ff; margin:0;">
-  <header style="border-bottom:1px solid rgba(255,255,255,0.08);">
+  <header style="border-bottom:1px solid rgba(255,255,255,0.08); position:relative;">
+
+    <!-- Top-right data button -->
+    <button
+      id="dataButton"
+      aria-label="Open data panel"
+      style="
+        position:absolute;
+        top:20px;
+        right:20px;
+        padding:10px 14px;
+        border-radius:10px;
+        border:1px solid rgba(255,255,255,0.2);
+        background:#0b2a46;
+        color:#e9f1ff;
+        font-size:14px;
+        cursor:pointer;
+      "
+    >
+      Data
+    </button>
+
     <div style="max-width:1000px; margin:0 auto; padding:28px 20px;">
       <h1 style="margin:0; font-size:28px; letter-spacing:0.2px;"></h1>
       <p style="margin:10px 0 0; opacity:0.85; line-height:1.4;">
@@ -22,17 +43,19 @@
           src="onemorelogo.png"
           alt="OneMoreLogo"
           style="height:48px; width:auto;"
-          />
-        <a href="https://apps.apple.com/gb/app/trackingonemore/id6755639475"
+        />
+
+        <a
+          href="https://apps.apple.com/gb/app/trackingonemore/id6755639475"
           target="_blank"
           rel="noopener"
           aria-label="Download Tracking One More on the App Store"
-            style="display:inline-block;"
+          style="display:inline-block;"
         >
-        <img
-          src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-          alt="Download on the App Store"
-          style="height:48px; width:auto;"
+          <img
+            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+            alt="Download on the App Store"
+            style="height:48px; width:auto;"
           />
         </a>
       </div>
@@ -43,12 +66,13 @@
     <section id="screenshots">
       <h2 style="margin:0 0 14px; font-size:18px; opacity:0.9;"></h2>
 
-      <!-- All images referenced directly from repo root -->
-      <div style="
-        display:grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap:14px;
-      ">
+      <div
+        style="
+          display:grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap:14px;
+        "
+      >
         <img src="dashboard.jpeg" alt="Dashboard" style="width:100%; height:auto; border-radius:16px; border:1px solid rgba(255,255,255,0.10);" />
         <img src="foodentry.jpeg" alt="Food entry" style="width:100%; height:auto; border-radius:16px; border:1px solid rgba(255,255,255,0.10);" />
         <img src="foodlog.jpeg" alt="Food log" style="width:100%; height:auto; border-radius:16px; border:1px solid rgba(255,255,255,0.10);" />
@@ -65,5 +89,8 @@
       <small>© Tracking One More</small>
     </div>
   </footer>
+
+  <!-- App logic -->
+  <script src="app.js"></script>
 </body>
 </html>
