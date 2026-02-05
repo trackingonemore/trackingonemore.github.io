@@ -12,10 +12,11 @@
 <body style="background:#061a2b; color:#e9f1ff; margin:0;">
   <header style="border-bottom:1px solid rgba(255,255,255,0.08); position:relative;">
 
-    <!-- Top-right data button -->
-    <button
+    <!-- Top-right data link (guaranteed navigation to webindex.html) -->
+    <a
       id="dataButton"
-      aria-label="Open data panel"
+      href="webindex.html"
+      aria-label="Open Web Version"
       style="
         position:absolute;
         top:20px;
@@ -26,11 +27,15 @@
         background:#0b2a46;
         color:#e9f1ff;
         font-size:14px;
-        cursor:pointer;
+        text-decoration:none;
+        line-height:1;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
       "
     >
       Data
-    </button>
+    </a>
 
     <div style="max-width:1000px; margin:0 auto; padding:28px 20px;">
       <h1 style="margin:0; font-size:28px; letter-spacing:0.2px;"></h1>
@@ -90,7 +95,7 @@
     </div>
   </footer>
 
-  <!-- App logic -->
+  <!-- App logic (optional; not required for the Data link to work) -->
   <script src="app.js"></script>
 </body>
 </html>
